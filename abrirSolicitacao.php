@@ -11,9 +11,9 @@ require_once "conecta.php";
 // }
 // $idLogado = $_SESSION['id_usuario'];
 
-$sql = "SELECT * FROM `horasalunos` where `id_horas` = $id limit 1";
+$id = $_GET['id'];
+$sql = "SELECT * FROM `horasalunos` WHERE `id_horas` = $id limit 1";
 $horasAlunos = mysqli_query($conexao, $sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -62,39 +62,39 @@ $horasAlunos = mysqli_query($conexao, $sql);
             <h5>Dados da solicitação</h5>
 
 
-            <?php while($horas = mysqli_fetch_assoc($horasAlunos)){?>
-            <div class="card border-secondary mb-3" style="max-width: 30rem;">
-                <div class="card-body text-secondary">
-                    <label for="">Código solicitação: <?php echo $horas['id_horas']; ?> </label><br>
-                    <label for="">Título solicitação:</label><br>
-                    <label for="">Modalidade:</label><br>
-                    <label for="">turma:</label><br>
-                    <label for="">Data de abertura:</label>
+            <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) { ?>
+                <div class="card border-secondary mb-3" style="max-width: 30rem;">
+                    <div class="card-body text-secondary">
+                        <label for="">Código solicitação: <?php echo $horas['id_horas']; ?> </label><br>
+                        <label for="">Título solicitação: <?php echo $horas['titulo']; ?></label><br>
+                        <label for="">Modalidade: <?php echo $horas['modalidade']; ?></label><br>
+                        <label for="">Data de abertura: <?php echo $horas['dataCadastro']; ?></label><br>
+                        <label for="">Arquivo: <?php echo $horas['arquivo']; ?></label>
 
+
+                    </div>
                 </div>
-            </div>
             <?php } ?>
             <h5>Gerencie abaixo a solicitação:</h5>
-            <div class="form-group">
-                <select style="width: 480px;" name="titulo" class="custom-select">
-                    <option selected>Selecione...</option>
-                    <option value="palestra">Pendente</option>
-                    <option value="estagio">Negar</option>
-                    <option value="cursos">Aprovar</option>
-                </select>
-            </div>
+            <form method="POST" action="reconsidera.php">
+                <div class="form-group">
+                    <select style="width: 480px;" name="status" class="custom-select">
+                        <option selected>Selecione...</option>
+                        <option value="aprovado">Aprovar</option>
+                        <option value="revisao">Revisar</option>
+                        <option value="reprovado">Reprovar</option>
+                    </select>
+                </div>
 
-            <div style="width: 480px;" class="form-group">
-                <textarea placeholder="Se necessário, adiciona uma descrição" name="descricao" class="form-control" id="descricao" rows="5"></textarea>
-            </div>
+                <div style="width: 480px;" class="form-group">
+                    <textarea placeholder="Se necessário, adicione uma descrição" name="descricao" class="form-control" id="descricao" rows="5"></textarea>
+                </div>
 
-            <div class="btn-group">
-                <button style="width:150px;" type="submit" name="btnHoras" class="btn btn-primary">Enviar</button>
-            </div>
+                <div class="btn-group">
+                    <button style="width:150px;" type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
         </div>
-
-
-
         <footer>
             <p>
                 Federação das Indústrias do Estado de Santa Catarina <br>
@@ -104,5 +104,4 @@ $horasAlunos = mysqli_query($conexao, $sql);
 
         </footer>
 </body>
-
 </html>

@@ -71,7 +71,6 @@ $horasAlunos = mysqli_query($conexao, $sql);
         </thead>
 
         <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) { 
-          $id = $horas['id_horas'];
         ?>
           
           <tbody>
@@ -80,8 +79,10 @@ $horasAlunos = mysqli_query($conexao, $sql);
               <td> <?php echo $horas['turma']; ?> </td>
               <td> <?php echo $horas['dataCadastro'];  ?> </td>
               <td>
-                <a href="abrirSolicitacao.php">Abrir solicitação
-                </a>
+              <?php
+              $id = $horas['id_horas'];
+              echo "<a href=abrirSolicitacao.php?id=".$id.">Abrir solicitação</a>"
+              ?>
               </td>
             </tr>
           </tbody>

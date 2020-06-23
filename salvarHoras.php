@@ -17,7 +17,7 @@ $titulo = $_POST['titulo'];
 $upload = $_POST['upload'];
 $descricao = $_POST['descricao'];
 
-echo $sql = "INSERT INTO `horasalunos` (`id_usuario`, `modalidade`, `titulo`, `arquivo`, `descricao`, `status`, `dataCadastro`) VALUES ('$idLogado', '$modalidade', '$titulo', '$upload', '$descricao', 'aguardando', NOW())";
+$sql = "INSERT INTO `horasalunos` (`id_usuario`, `modalidade`, `titulo`, `arquivo`, `descricao`, `status`, `dataCadastro`) VALUES ('$idLogado', '$modalidade', '$titulo', '$upload', '$descricao', 'aguardando', NOW())";
 $horasAluno = mysqli_query($conexao, $sql);
 
 
