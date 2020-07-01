@@ -1,6 +1,4 @@
 <?php
-session_start();
-date_default_timezone_set('America/Sao_Paulo');
 require_once "conecta.php";
 
 
@@ -11,16 +9,16 @@ require_once "conecta.php";
 //   header("Location: index.php");
 // }
 
+$id = $_GET['id'];
 $status = $_POST['status'];
-//$descricao = $_POST['descricao'];
+$descricao = $_POST['descricao'];
 
-echo $sql = "UPDATE `horasalunos` SET `status` = $status";
+
+echo $sql = "UPDATE horasalunos SET status = '$status' WHERE id_horas = $id";
 $reconsidera = mysqli_query($conexao, $sql);
 
-if($reconsidera){
-    header("Location: abrirSolicitacao.php");
-} else{
-    echo "Erro ";
-}
+echo $sql = "INSERT INTO `reconsidera` (`motivo`, `id_horas`) VALUES ('$descricao', '$id')";
+$motivo = mysqli_query($conexao, $sql);
 
+header("Location: acompanhamentoAdm.php");
 ?>

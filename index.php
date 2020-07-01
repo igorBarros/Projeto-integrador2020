@@ -72,7 +72,7 @@ if (isset($_POST['btn-entrar'])) {
 
                     <div class="form-group">
                         <div class="col-md-10">
-                            <input type="text" name="usuario" class="form-control " placeholder="Login">
+                            <input type="text" name="usuario" class="form-control" placeholder="Login">
                         </div>
                     </div>
                     <div class="form-group">

@@ -61,22 +61,25 @@ $horasAlunos = mysqli_query($conexao, $sql);
         <div id="principal" class="principal col-9">
             <h5>Dados da solicitação</h5>
 
-
             <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) { ?>
                 <div class="card border-secondary mb-3" style="max-width: 30rem;">
                     <div class="card-body text-secondary">
                         <label for="">Código solicitação: <?php echo $horas['id_horas']; ?> </label><br>
+                        <label for="">Data de abertura: <?php echo $horas['dataCadastro']; ?></label><br>
                         <label for="">Título solicitação: <?php echo $horas['titulo']; ?></label><br>
                         <label for="">Modalidade: <?php echo $horas['modalidade']; ?></label><br>
-                        <label for="">Data de abertura: <?php echo $horas['dataCadastro']; ?></label><br>
+                        <label for="">Descrição: <?php echo $horas['descricao']; ?></label><br>
                         <label for="">Arquivo: <?php echo $horas['arquivo']; ?></label>
 
 
                     </div>
                 </div>
             <?php } ?>
+
             <h5>Gerencie abaixo a solicitação:</h5>
-            <form method="POST" action="reconsidera.php">
+
+            <form method="POST" action="reconsidera.php?id=<?php echo $id; ?>">
+
                 <div class="form-group">
                     <select style="width: 480px;" name="status" class="custom-select">
                         <option selected>Selecione...</option>
@@ -87,11 +90,12 @@ $horasAlunos = mysqli_query($conexao, $sql);
                 </div>
 
                 <div style="width: 480px;" class="form-group">
-                    <textarea placeholder="Se necessário, adicione uma descrição" name="descricao" class="form-control" id="descricao" rows="5"></textarea>
+                    <textarea placeholder="Se necessário, adicione uma descrição" name="descricao" class="form-control" id="descricao" rows="3"></textarea>
                 </div>
 
                 <div class="btn-group">
                     <button style="width:150px;" type="submit" class="btn btn-primary">Enviar</button>
+
                 </div>
             </form>
         </div>
@@ -104,4 +108,5 @@ $horasAlunos = mysqli_query($conexao, $sql);
 
         </footer>
 </body>
+
 </html>

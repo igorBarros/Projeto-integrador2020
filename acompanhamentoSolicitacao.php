@@ -11,7 +11,7 @@ if (!empty($_SESSION['id_usuario'])) {
 }
 $idLogado = $_SESSION['id_usuario'];
 
-$sql = "SELECT * FROM `horasalunos` WHERE `id_usuario` = '$idLogado' ORDER BY `dataCadastro` DESC";
+$sql = "SELECT * FROM `horasalunos` INNER JOIN reconsidera ON horasalunos.id_horas = reconsidera.id_horas WHERE `id_usuario` = '$idLogado' ORDER BY `dataCadastro` DESC ";
 $horaAluno = mysqli_query($conexao, $sql);
 
 
@@ -69,10 +69,13 @@ $horaAluno = mysqli_query($conexao, $sql);
             <th scope="col">Modalidade</th>
             <th scope="col">Data da abertura</th>
             <th scope="col">Status</th>
+            <th scope="col">Situação</th>
+            <th scope="col"></th>
           </tr>
         </thead>
 
         <?php while($hora = $horaAluno->fetch_array()){?>
+          
           <tbody>
             <tr>
               <td> <?php echo $hora["titulo"]; ?> </td>
@@ -82,6 +85,12 @@ $horaAluno = mysqli_query($conexao, $sql);
                 <select disabled style="width: 130px;" class="custom-select">
                   <option value=""><?php echo $hora["status"]; ?></option>
                 </select>
+              </td>
+              <td> <textarea class="form-control" name="motivo" disabled rows="2"><?php echo $hora['motivo']; ?></textarea></td>
+              <td>
+              <?php $id = $hora['id_horas']; 
+                echo "<a href=revisaSolicitacao.php?id=".$id.">Reencaminhar solicitação</a>"
+                ?>
               </td>
             </tr>
           </tbody>

@@ -10,7 +10,7 @@ if (!empty($_SESSION['id_usuario'])) {
   header("Location: index.php");
 }
 $idLogado = $_SESSION['id_usuario'];
-
+$id = $_GET['id'];
 
 ?>
 
@@ -39,10 +39,10 @@ $idLogado = $_SESSION['id_usuario'];
         <div class="link">
           <a href="paginaUsuario.php">Principal</a>
         </div>
-        <div class="link active">
+        <div class="link">
           <a href="novasolicitacao.php">Cadastrar nova solicitação</a>
         </div>
-        <div class="link">
+        <div class="link active">
           <a href="acompanhamentoSolicitacao.php">Acompanhamento de solicitações</a>
         </div>
         <div class="link">
@@ -57,11 +57,11 @@ $idLogado = $_SESSION['id_usuario'];
 
     <div id="principal" class="principal col-9">
 
-      <form method="POST" action="salvarHoras.php" class="modalidade">
+      <form method="POST" action="atualiza.php?id=<?php echo $id; ?>" class="modalidade">
+
         <div class="row">
           <div class="modalidade-content">
             <label class="text-modalidade">Modalidade desejada*</label>
-
             <label class="form-check">
               <input type="radio" name="modalidade" value="ensino"><span class="label label-success"> Ensino</span>
             </label>
@@ -69,7 +69,7 @@ $idLogado = $_SESSION['id_usuario'];
             <label class="form-check">
               <input type="radio" name="modalidade" value="pesquisa"><span class="label label-success"> Pesquisa</span>
             </label>
-            
+
             <label class="form-check">
               <input type="radio" name="modalidade" value="extensao"><span class="label label-success"> Extensão</span>
             </label>
@@ -77,7 +77,7 @@ $idLogado = $_SESSION['id_usuario'];
           </div>
         </div>
         <div class="form-group">
-          <select  style="width: 500px;" name="titulo" class="custom-select">
+          <select style="width: 500px;" name="titulo" class="custom-select">
             <option selected>Selecione...</option>
             <option value="palestra">Palestra</option>
             <option value="estagio">Estagio</option>
@@ -105,6 +105,7 @@ $idLogado = $_SESSION['id_usuario'];
         <div class="btn-group">
           <button style="width:150px;" type="reset" class="btn btn-secondary">Limpar</button>
           <button style="width:150px;" type="submit" name="btnHoras" class="btn btn-primary">Enviar</button>
+
         </div>
       </form>
 

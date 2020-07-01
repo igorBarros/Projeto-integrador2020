@@ -3,7 +3,6 @@ session_start();
 date_default_timezone_set('America/Sao_Paulo');
 require_once "conecta.php";
 
-
 if (!empty($_SESSION['id_usuario'])) {
   $_SESSION['id_usuario'];
 } else {

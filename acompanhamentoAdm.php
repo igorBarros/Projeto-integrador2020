@@ -11,7 +11,7 @@ require_once "conecta.php";
 // }
 // $idLogado = $_SESSION['id_usuario'];
 
-$sql = "SELECT * FROM `horasAlunos` INNER JOIN usuarios ON horasAlunos.id_usuario = usuarios.id_usuario ORDER BY `dataCadastro` DESC";
+$sql = "SELECT * FROM `horasAlunos` INNER JOIN usuarios ON horasAlunos.id_usuario = usuarios.id_usuario where `status` = 'aguardando' ORDER BY `dataCadastro` DESC";
 $horasAlunos = mysqli_query($conexao, $sql);
 
 ?>
