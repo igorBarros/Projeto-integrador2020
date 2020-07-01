@@ -13,4 +13,7 @@ $descricao = $_POST['descricao'];
 echo $sql = "UPDATE horasalunos SET `id_usuario` = $idLogado, `modalidade` = '$modalidade', `titulo` = '$titulo', `descricao` = '$descricao', `status` = 'aguardando', `dataCadastro` = NOW() WHERE id_horas = $id";
 $atualiza = mysqli_query($conexao, $sql);
 
+$sql = "DELETE FROM `reconsidera` where id_horas = $id";
+$deleta = mysqli_query($conexao, $sql);
+
 header("Location: acompanhamentoSolicitacao.php");

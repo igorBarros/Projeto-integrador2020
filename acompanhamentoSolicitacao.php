@@ -14,7 +14,6 @@ $idLogado = $_SESSION['id_usuario'];
 $sql = "SELECT * FROM `horasalunos` INNER JOIN reconsidera ON horasalunos.id_horas = reconsidera.id_horas WHERE `id_usuario` = '$idLogado' ORDER BY `dataCadastro` DESC ";
 $horaAluno = mysqli_query($conexao, $sql);
 
-
 ?>
 
 <!DOCTYPE html>
