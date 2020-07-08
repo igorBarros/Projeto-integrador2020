@@ -38,12 +38,13 @@ $horasAlunos = mysqli_query($conexao, $sql);
 
     <div id="menu" class="menu col-3">
       <nav>
-        <div class="link">
+        <div class="link ">
           <a href="paginaAdm.php">Principal</a>
         </div>
         <div class="link active">
           <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
         </div>
+
         <div class="link">
           <a href="relatorios.php">Relatorios</a>
         </div>
@@ -70,19 +71,21 @@ $horasAlunos = mysqli_query($conexao, $sql);
           </tr>
         </thead>
 
-        <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) { 
+        <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) {
+          $date = new dateTime($horas['dataCadastro']);
+
         ?>
-          
+
           <tbody>
             <tr>
               <td> <?php echo $horas['nome']; ?> </td>
               <td> <?php echo $horas['turma']; ?> </td>
-              <td> <?php echo $horas['dataCadastro'];  ?> </td>
+              <td> <?php echo $date->format('d-m-Y H:i:s');  ?> </td>
               <td>
-              <?php
-              $id = $horas['id_horas'];
-              echo "<a href=abrirSolicitacao.php?id=".$id.">Abrir solicitação</a>"
-              ?>
+                <?php
+                $id = $horas['id_horas'];
+                echo "<a href=abrirSolicitacao.php?id=" . $id . ">Abrir solicitação</a>"
+                ?>
               </td>
             </tr>
           </tbody>

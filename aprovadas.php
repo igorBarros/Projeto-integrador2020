@@ -4,15 +4,18 @@ date_default_timezone_set('America/Sao_Paulo');
 require_once "conecta.php";
 
 if (!empty($_SESSION['id_usuario'])) {
-    $_SESSION['id_usuario'];
+  $_SESSION['id_usuario'];
 } else {
-    $_SESSION['msg'] = "Você precisa estar logado";
-    header("Location: index.php");
+  $_SESSION['msg'] = "Você precisa estar logado";
+  header("Location: index.php");
 }
 $idLogado = $_SESSION['id_usuario'];
 
-$sql = "SELECT * FROM `horasalunos` INNER JOIN reconsidera ON horasalunos.id_horas = reconsidera.id_horas WHERE `id_usuario` = '$idLogado' AND `status`!= 'Aprovado' ORDER BY `dataCadastro` DESC ";
+$sql = "SELECT * FROM `horasalunos` INNER JOIN reconsidera ON horasalunos.id_horas = reconsidera.id_horas WHERE `id_usuario` = '$idLogado' AND `status`= 'Aprovado' ORDER BY `dataCadastro` DESC ";
 $horaAluno = mysqli_query($conexao, $sql);
+
+$sql = "SELECT SUM(horas) FROM `horasalunos` WHERE `id_usuario` = '$idLogado'";
+$horaAprovadas = mysqli_query($conexao, $sql);
 
 ?>
 
@@ -45,10 +48,10 @@ $horaAluno = mysqli_query($conexao, $sql);
         <div class="link">
           <a href="novasolicitacao.php">Cadastrar nova solicitação</a>
         </div>
-        <div class="link active">
+        <div class="link">
           <a href="acompanhamentoSolicitacao.php">Acompanhamento de solicitações</a>
         </div>
-        <div class="link">
+        <div class="link active">
           <a href="aprovadas.php">Solicitações Aprovadas</a>
         </div>
         <div class="link">
@@ -69,39 +72,33 @@ $horaAluno = mysqli_query($conexao, $sql);
           <tr>
             <th scope="col">Titulo</th>
             <th scope="col">Modalidade</th>
-            <th scope="col">Data da abertura</th>
-            <th scope="col">Status</th>
-            <th scope="col">Situação</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Horas aprovadas</th>
             <th scope="col"></th>
           </tr>
         </thead>
 
-        <?php while($hora = $horaAluno->fetch_array()){
+        <?php while ($hora = $horaAluno->fetch_array()) {
           $date = new dateTime($hora['dataCadastro']);
-          ?>
-          
+        ?>
+
           <tbody>
             <tr>
               <td> <?php echo $hora["titulo"]; ?> </td>
               <td> <?php echo $hora["modalidade"]; ?> </td>
-              <td> <?php echo $date->format('d-m-Y H:i:s'); ?> </td>
-              <td>
-                <select disabled style="width: 130px;" class="custom-select">
-                  <option value=""><?php echo $hora["status"]; ?></option>
-                </select>
-              </td>
-              <td> <textarea class="form-control" name="motivo" disabled rows="2"><?php echo $hora['motivo']; ?></textarea></td>
-              <td>
-              <?php $id = $hora['id_horas']; 
-                echo "<a href=revisaSolicitacao.php?id=".$id.">Reencaminhar solicitação</a>"
-                ?>
-              </td>
+              <td> <?php echo $hora["descricao"]; ?> </td>
+              <td> <?php echo $hora["horas"]; ?> </td>
             </tr>
           </tbody>
-        <?php }?>
+        <?php } ?>
       </table>
 
+      <div>
+        <?php while ($hora = $horaAprovadas->fetch_array()) { ?>
+          <p>Total de horas aprovadas: <?php echo $hora['SUM(horas)']; ?>/60h </p>
+        <?php } ?>
 
+      </div>
     </div>
   </div>
 

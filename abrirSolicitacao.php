@@ -46,6 +46,9 @@ $horasAlunos = mysqli_query($conexao, $sql);
                     <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
                 </div>
                 <div class="link">
+                    <a href="gerenciamento.php">Gerenciamento de solicitações</a>
+                </div>
+                <div class="link">
                     <a href="relatorios.php">Relatorios</a>
                 </div>
                 <div class="link">
@@ -59,13 +62,15 @@ $horasAlunos = mysqli_query($conexao, $sql);
         </div>
 
         <div id="principal" class="principal col-9">
-            <h5>Dados da solicitação</h5>
+            <h7>Dados da solicitação</h7>
 
-            <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) { ?>
+            <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) {
+                $date = new dateTime($horas['dataCadastro']);
+            ?>
                 <div class="card border-secondary mb-3" style="max-width: 30rem;">
                     <div class="card-body text-secondary">
                         <label for="">Código solicitação: <?php echo $horas['id_horas']; ?> </label><br>
-                        <label for="">Data de abertura: <?php echo $horas['dataCadastro']; ?></label><br>
+                        <label for="">Data de abertura: <?php echo $date->format('d-m-Y H:i:s'); ?></label><br>
                         <label for="">Título solicitação: <?php echo $horas['titulo']; ?></label><br>
                         <label for="">Modalidade: <?php echo $horas['modalidade']; ?></label><br>
                         <label for="">Descrição: <?php echo $horas['descricao']; ?></label><br>
@@ -83,19 +88,23 @@ $horasAlunos = mysqli_query($conexao, $sql);
                 <div class="form-group">
                     <select style="width: 480px;" name="status" class="custom-select">
                         <option selected>Selecione...</option>
-                        <option value="aprovado">Aprovar</option>
-                        <option value="revisao">Revisar</option>
-                        <option value="reprovado">Reprovar</option>
+                        <option value="Aprovado">Aprovar</option>
+                        <option value="Revisão">Revisar</option>
+                        <option value="Reprovado">Reprovar</option>
                     </select>
                 </div>
 
                 <div style="width: 480px;" class="form-group">
-                    <textarea placeholder="Se necessário, adicione uma descrição" name="descricao" class="form-control" id="descricao" rows="3"></textarea>
+                <label for="">Caso solicitação aprovada, identifique a quantidade de horas abaixo</label>
+                    <input type="number" name="horas" class="form-control" id="horas"></input>
+                </div>
+
+                <div style="width: 480px;" class="form-group">
+                    <textarea placeholder="Se desejar, adicione uma descrição"  name="descricao" class="form-control" id="descricao" rows="3"></textarea>
                 </div>
 
                 <div class="btn-group">
                     <button style="width:150px;" type="submit" class="btn btn-primary">Enviar</button>
-
                 </div>
             </form>
         </div>

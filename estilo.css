@@ -49,6 +49,7 @@ nav a{
     text-align: center;
     margin-right: 205px;
 }
+
 .topo-header {
     width: 100%;
     display: flex;
@@ -74,6 +75,7 @@ nav a{
     justify-content: center;
     text-align: center;
 } 
+
 
 form#telalogin{
     display: flex;
@@ -106,6 +108,7 @@ form#telalogin input.form-control{
     margin-right: 20px;
     font-weight: 600;
 }
+
 .options {
     text-align: left;
 }

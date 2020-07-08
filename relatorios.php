@@ -24,6 +24,8 @@ require_once "conecta.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- chamando CSS -->
     <link rel="stylesheet" href="estilo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 
 
@@ -43,6 +45,7 @@ require_once "conecta.php";
                 <div class="link">
                     <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
                 </div>
+
                 <div class="link active">
                     <a href="relatorios.php">Relatorios</a>
                 </div>
@@ -57,9 +60,41 @@ require_once "conecta.php";
         </div>
 
         <div id="principal" class="principal col-9">
+            <p><i>Nesta página você pode gerar os relatórios a fim de quantificar o status das solicitação dos alunos cadastrados na plataforma:</i></p>
+            <form action="">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label class="text-modalidade"> <b>Status da solicitação</b> </label>
 
+                        <label class="form-check">
+                            <input type="radio" name="modalidade" value="Aprovada"><span class="label label-success"> Aprovadas</span>
+                        </label>
+
+                        <label class="form-check">
+                            <input type="radio" name="modalidade" value="Revisão"><span class="label label-success"> Pendentes</span>
+                        </label>
+
+                        <label class="form-check">
+                            <input type="radio" name="modalidade" value="Reprovado"><span class="label label-success"> Negadas</span>
+                        </label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><b>Data da solicitação</b></label>
+                        <input type="date" class="form-control">
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label> </label>
+                        <button class="form-control">Buscar</button>
+                    </div>
+
+                </div>
 
         </div>
+        </form>
+
+    </div>
     </div>
 
     <footer>

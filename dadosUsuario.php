@@ -45,6 +45,9 @@ $idLogado = $_SESSION['id_usuario'];
                 <div class="link">
                     <a href="acompanhamentoSolicitacao.php">Acompanhamento de solicitações</a>
                 </div>
+                <div class="link">
+                    <a href="aprovadas.php">Solicitações Aprovadas</a>
+                </div>
                 <div class="link active">
                     <a href="dadosUsuario.php">Dados do usuário</a>
                 </div>
@@ -88,7 +91,7 @@ $idLogado = $_SESSION['id_usuario'];
 
 </html>
 
-<?php 
+<?php
 
 
 ?>

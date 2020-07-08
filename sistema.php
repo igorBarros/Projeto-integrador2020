@@ -43,6 +43,7 @@ require_once "conecta.php";
                 <div class="link">
                     <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
                 </div>
+
                 <div class="link">
                     <a href="relatorios.php">Relatorios</a>
                 </div>

@@ -25,6 +25,7 @@ $idLogado = $_SESSION['id_usuario'];
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <!-- chamando CSS -->
   <link rel="stylesheet" href="estilo.css">
+  <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 </head>
 
 
@@ -46,6 +47,9 @@ $idLogado = $_SESSION['id_usuario'];
           <a href="acompanhamentoSolicitacao.php">Acompanhamento de solicitações</a>
         </div>
         <div class="link">
+          <a href="aprovadas.php">Solicitações Aprovadas</a>
+        </div>
+        <div class="link">
           <a href="dadosUsuario.php">Dados do usuário</a>
         </div>
         <div class="link">
@@ -56,32 +60,57 @@ $idLogado = $_SESSION['id_usuario'];
     </div>
 
     <div id="principal" class="principal col-9">
-
       <form method="POST" action="salvarHoras.php" class="modalidade">
+        <h5><i>Lembre-se, a modalidade selecionada deve ter relação com a atividade.</i></h5>
+
         <div class="row">
-          <div class="modalidade-content">
+          <div id="modalidade" class="modalidade-content">
             <label class="text-modalidade">Modalidade desejada*</label>
 
             <label class="form-check">
-              <input type="radio" name="modalidade" value="ensino"><span class="label label-success"> Ensino</span>
+              <input type="radio" name="modalidade" value="Ensino"><span class="label label-success"> Ensino</span>
             </label>
 
             <label class="form-check">
-              <input type="radio" name="modalidade" value="pesquisa"><span class="label label-success"> Pesquisa</span>
+              <input type="radio" name="modalidade" value="Pesquisa"><span class="label label-success"> Pesquisa</span>
             </label>
-            
+
             <label class="form-check">
-              <input type="radio" name="modalidade" value="extensao"><span class="label label-success"> Extensão</span>
+              <input type="radio" name="modalidade" value="Extensão"><span class="label label-success"> Extensão</span>
             </label>
 
           </div>
         </div>
         <div class="form-group">
-          <select  style="width: 500px;" name="titulo" class="custom-select">
-            <option selected>Selecione...</option>
-            <option value="palestra">Palestra</option>
-            <option value="estagio">Estagio</option>
-            <option value="cursos">Cursos</option>
+          <select style="width: 500px;" name="titulo" class="custom-select">
+            <option disabled selected>Atividade</option>
+            <option style="color: #ACDFBA;" disabled>ENSINO</option>
+
+            <option value="Aula inaugural 4h">Aula inaugural 4Hrs</option>
+            <option value="Unidade Curricular não prevista na organização curricular do curso, max 50h">Unidade Curricular não prevista na organização curricular do curso, max 50h</option>
+            <option value="Monitoria acadêmica, max 40h">Monitoria acadêmica, max 40h</option>
+            <option value="Visita técnica, max 20h">Visita técnica, max 20h</option>
+            <option value="Ministrante de curso, max 30h">Ministrante de curso, max 30h</option>
+            <option value="Participação em palestra, 3h por palestra">Participação em palestra, 3h por palestra</option>
+            <option value="Participação em projetos integradores, 20h">Participação em projetos integradores, 20h</option>
+
+            <option style="color: #ACDFBA;" disabled>PESQUISA</option>
+            <option value="Participação em projeto de pesquisa, max 40h">Participação em projeto de pesquisa, max 40h</option>
+            <option value="Participações em congressos, seminários, simpósios, 40h por Eventos">Participações em congressos, seminários, simpósios, 40h por Eventos</option>
+            <option value="Publicação de artigos, 40h por artigo">Publicação de artigos, 40h por artigo</option>
+            <option value="Publicação de resumos, 40h por resumo">Publicação de resumos, 40h por resumo</option>
+            <option value="Autoria ou co-autoria, 40h">Autoria ou co-autoria, 40h</option>
+
+            <option style="color: #ACDFBA;" disabled>EXTENSÃO</option>
+
+            <option value="Estágio, max 50h">Estágio, max 50h</option>
+            <option value="Participação de eventos, max 10h">Participação de eventos, max 10h</option>
+            <option value="Participação em congressos, 10h">Participação em congressos, 10h</option>
+            <option value="Participações em congressos, seminários, simpósios, 5h por dia">Participações em congressos, seminários, simpósios, 5h por dia</option>
+            <option value="Participações de cursos de extensão, max 40h">Participações de cursos de extensão, max 40h</option>
+            <option value="Representação estudantil, max 10h">Representação estudantil, max 10h</option>
+            <option value="Representante de turma, max 20h">Representante de turma, max 20h</option>
+            <option value="Curso de linguas, max 40h">Curso de linguas, max 40h</option>
 
           </select>
         </div>
@@ -119,6 +148,7 @@ $idLogado = $_SESSION['id_usuario'];
     </p>
 
   </footer>
+
 </body>
 
 </html>
