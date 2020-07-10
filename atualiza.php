@@ -10,11 +10,18 @@ $titulo = $_POST['titulo'];
 $upload = $_POST['upload'];
 $descricao = $_POST['descricao'];
 
-$sql = "UPDATE horasalunos SET `id_usuario` = $idLogado, `modalidade` = '$modalidade', `titulo` = '$titulo', `arquivo` = '$upload', `descricao` = '$descricao', `status` = 'aguardando', `dataCadastro` = NOW() WHERE id_horas = $id";
-$atualiza = mysqli_query($conexao, $sql);
+if (empty($modalidade && $titulo && $upload && $descricao)) { ?>
+  <script>
+    alert('Todos os campos devem ser preenchidos');
+    window.location.replace("acompanhamentoSolicitacao.php");
+  </script>
+<?php } else {
+  $sql = "UPDATE horasalunos SET `id_usuario` = $idLogado, `modalidade` = '$modalidade', `titulo` = '$titulo', `arquivo` = '$upload', `descricao` = '$descricao', `status` = 'aguardando', `dataCadastro` = NOW() WHERE id_horas = $id";
+  $atualiza = mysqli_query($conexao, $sql);
 
-$sql = "DELETE FROM `reconsidera` where id_horas = $id";
-$deleta = mysqli_query($conexao, $sql);
+  $sql = "DELETE FROM `reconsidera` where id_horas = $id";
+  $deleta = mysqli_query($conexao, $sql);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

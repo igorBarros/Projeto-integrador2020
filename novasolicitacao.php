@@ -68,15 +68,15 @@ $idLogado = $_SESSION['id_usuario'];
             <label class="text-modalidade">Modalidade desejada*</label>
 
             <label class="form-check">
-              <input type="radio" name="modalidade" value="Ensino"><span class="label label-success"> Ensino</span>
+              <input type="radio" id="modalidade" name="modalidade" value="Ensino"><span class="label label-success"> Ensino</span>
             </label>
 
             <label class="form-check">
-              <input type="radio" name="modalidade" value="Pesquisa"><span class="label label-success"> Pesquisa</span>
+              <input type="radio" id="modalidade" name="modalidade" value="Pesquisa"><span class="label label-success"> Pesquisa</span>
             </label>
 
             <label class="form-check">
-              <input type="radio" name="modalidade" value="Extensão"><span class="label label-success"> Extensão</span>
+              <input type="radio" id="modalidade" name="modalidade" value="Extensão"><span class="label label-success"> Extensão</span>
             </label>
 
           </div>
@@ -136,7 +136,6 @@ $idLogado = $_SESSION['id_usuario'];
           <button style="width:150px;" type="submit" name="btnHoras" class="btn btn-primary">Enviar</button>
         </div>
       </form>
-
     </div>
   </div>
 
@@ -152,3 +151,4 @@ $idLogado = $_SESSION['id_usuario'];
 </body>
 
 </html>
+<?php

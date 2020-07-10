@@ -10,14 +10,24 @@ if (!empty($_SESSION['id_usuario'])) {
   header("Location: index.php");
 }
 
+
+
 $idLogado = $_SESSION['id_usuario'];
 $modalidade = $_POST['modalidade'];
 $titulo = $_POST['titulo'];
 $upload = $_POST['upload'];
 $descricao = $_POST['descricao'];
 
+if (empty($modalidade && $titulo && $upload && $descricao)) { ?>
+  <script>
+    alert('Todos os campos devem ser preenchidos');
+    window.location.replace("novasolicitacao.php");
+  </script>
+<?php } else{
 $sql = "INSERT INTO `horasalunos` (`id_usuario`, `modalidade`, `titulo`, `arquivo`, `descricao`, `status`, `dataCadastro`) VALUES ('$idLogado', '$modalidade', '$titulo', '$upload', '$descricao', 'aguardando', NOW())";
 $horasAluno = mysqli_query($conexao, $sql);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
