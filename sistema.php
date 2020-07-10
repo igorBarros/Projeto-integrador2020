@@ -69,10 +69,6 @@ $idLogado = $_SESSION['id_usuario'];
                     <input style="width: 500px;" type="nome" class="form-control" name="usuario" placeholder="Usuário">
                 </div>
                 <div class="form-group">
-                    <input style="width: 500px;" type="email" class="form-control" name="email" placeholder="Email">
-                </div>
-
-                <div class="form-group">
                     <input style="width: 500px;" type="password" class="form-control" name="senha" placeholder="Senha">
                 </div>
                 <div class="form-group">
@@ -81,6 +77,10 @@ $idLogado = $_SESSION['id_usuario'];
                         <option value="0">Aluno</option>
                         <option value="1">Administrador</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Se usuario aluno, informar turma.</label>
+                    <input style="width: 500px;" type="text" class="form-control" name="turma" placeholder="Turma">
                 </div>
                 <button style="width:150px;" type="submit" class="btn btn-primary">Cadastrar</button>
             </form>

@@ -65,9 +65,8 @@ $idLogado = $_SESSION['id_usuario'];
                     <input style="width: 500px;" type="nome" class="form-control" name="nome" id="nome" placeholder="Nome">
                 </div>
                 <div class="form-group">
-                    <input style="width: 500px;" type="email" class="form-control" name="email" id="nome" placeholder="Email">
+                    <input style="width: 500px;" type="password" class="form-control" name="senha" placeholder="Senha atual">
                 </div>
-
                 <div class="form-group">
                     <input style="width: 500px;" type="password" class="form-control" name="senha" placeholder="Nova senha">
                 </div>

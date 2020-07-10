@@ -10,14 +10,16 @@ if (!empty($_SESSION['id_usuario'])) {
   header("Location: index.php");
 }
 
-$nome = $_SESSION['nome'];
+$nome = $_POST['nome'];
 $usuario = $_POST['usuario'];
-$email = $_POST['email'];
 $senha = $_POST['senha'];
 $nivel = $_POST['nivel'];
+$turma = $_POST['turma'];
 
-$sql = "INSERT INTO `horasalunos` (`id_usuario`, `modalidade`, `titulo`, `arquivo`, `descricao`, `status`, `dataCadastro`) VALUES ('$idLogado', '$modalidade', '$titulo', '$upload', '$descricao', 'aguardando', NOW())";
-$horasAluno = mysqli_query($conexao, $sql);
+$senhacriptografada = password_hash($senha, PASSWORD_DEFAULT);
+
+echo $sql = "INSERT INTO `usuarios` (nome, usuario, senha, nivel, turma) VALUES ('$nome', '$usuario', '$senhacriptografada', '$nivel', '$turma')";
+$usuario = mysqli_query($conexao, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,24 +42,27 @@ $horasAluno = mysqli_query($conexao, $sql);
   </div>
   <div class="row">
     <div id="menu" class="menu col-3">
-      <nav>
-        <div class="link">
-          <a href="paginaUsuario.php">Principal</a>
-        </div>
-        <div class="link active">
-          <a href="novasolicitacao.php">Cadastrar nova solicitação</a>
-        </div>
-        <div class="link">
-          <a href="acompanhamentoSolicitacao.php">Acompanhamento de solicitações</a>
-        </div>
-        <div class="link">
-          <a href="dadosUsuario.php">Dados do usuário</a>
-        </div>
-        <div class="link">
-          <?php echo "<a href='sair.php'>Sair</a>"; ?>
-        </div>
+    <nav>
+                <div class="link">
+                    <a href="paginaAdm.php">Principal</a>
+                </div>
+                <div class="link">
+                    <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
+                </div>
+                <div class="link">
+                    <a href="gerenciamento.php">Gerenciamento de solicitações</a>
+                </div>
+                <div class="link">
+                    <a href="relatorios.php">Relatorios</a>
+                </div>
+                <div class="link active">
+                    <a href="sistema.php">sistema</a>
+                </div>
+                <div class="link">
+                    <?php echo "<a href='sair.php'>Sair</a>"; ?>
+                </div>
 
-      </nav>
+            </nav>
     </div>
 
     <div id="principal" class="principal col-9">
@@ -65,8 +70,8 @@ $horasAluno = mysqli_query($conexao, $sql);
       <div id="cadastro" class="card border-secondary mb-3" style="left: 450px; top: 190px; max-width: 18rem; padding: 1.25rem; text-align: center;">
         <?php
         if ($horasAluno = true) {
-          echo "A solicitação foi enviada com sucesso!"; ?>
-          <a class="form-control" href="novasolicitacao.php">OK</a>
+          echo "Usuario ".$usuario." cadastrado com sucesso!"; ?>
+          <a class="form-control" href="sistema.php">OK</a>
         <?php
         } else {
           echo "Tente novamente";

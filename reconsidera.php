@@ -75,7 +75,7 @@ $motivo = mysqli_query($conexao, $sql);
             <div id="cadastro" class="card border-secondary mb-3" style="left: 450px; top: 190px; max-width: 18rem; padding: 1.25rem; text-align: center;">
                 <?php
                 if ($horasAluno = true) {
-                    echo "A solicitação foi ".$status."!"; ?>
+                    echo "A solicitação foi encaminhada"; ?>
                     <a class="form-control" href="acompanhamentoAdm.php">OK</a>
                 <?php
                 } else {
