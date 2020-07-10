@@ -3,13 +3,13 @@ session_start();
 date_default_timezone_set('America/Sao_Paulo');
 require_once "conecta.php";
 
-// if (!empty($_SESSION['id_usuario'])) {
-//     $_SESSION['id_usuario'];
-// } else {
-//     $_SESSION['msg'] = "Você precisa estar logado";
-//     header("Location: index.php");
-// }
-// $idLogado = $_SESSION['id_usuario'];
+if (!empty($_SESSION['id_usuario'])) {
+    $_SESSION['id_usuario'];
+} else {
+    $_SESSION['msg'] = "Você precisa estar logado";
+    header("Location: index.php");
+}
+$idLogado = $_SESSION['id_usuario'];
 
 $id = $_GET['id'];
 $sql = "SELECT * FROM `horasalunos` WHERE `id_horas` = $id limit 1";
@@ -95,12 +95,12 @@ $horasAlunos = mysqli_query($conexao, $sql);
                 </div>
 
                 <div style="width: 480px;" class="form-group">
-                <label for="">Caso solicitação aprovada, identifique a quantidade de horas abaixo</label>
+                    <label for="">Caso solicitação aprovada, identifique a quantidade de horas abaixo</label>
                     <input type="number" name="horas" class="form-control" id="horas"></input>
                 </div>
 
                 <div style="width: 480px;" class="form-group">
-                    <textarea placeholder="Se desejar, adicione uma descrição"  name="descricao" class="form-control" id="descricao" rows="3"></textarea>
+                    <textarea placeholder="Se desejar, adicione uma descrição" name="descricao" class="form-control" id="descricao" rows="3"></textarea>
                 </div>
 
                 <div class="btn-group">

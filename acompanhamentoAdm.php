@@ -3,13 +3,13 @@ session_start();
 date_default_timezone_set('America/Sao_Paulo');
 require_once "conecta.php";
 
-// if (!empty($_SESSION['id_usuario'])) {
-//     $_SESSION['id_usuario'];
-// } else {
-//     $_SESSION['msg'] = "Você precisa estar logado";
-//     header("Location: index.php");
-// }
-// $idLogado = $_SESSION['id_usuario'];
+if (!empty($_SESSION['id_usuario'])) {
+    $_SESSION['id_usuario'];
+} else {
+    $_SESSION['msg'] = "Você precisa estar logado";
+    header("Location: index.php");
+}
+$idLogado = $_SESSION['id_usuario'];
 
 $sql = "SELECT * FROM `horasAlunos` INNER JOIN usuarios ON horasAlunos.id_usuario = usuarios.id_usuario where `status` = 'aguardando' ORDER BY `dataCadastro` DESC";
 $horasAlunos = mysqli_query($conexao, $sql);
@@ -44,7 +44,9 @@ $horasAlunos = mysqli_query($conexao, $sql);
         <div class="link active">
           <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
         </div>
-
+        <div class="link">
+          <a href="gerenciamento.php">Gerenciamento de solicitações</a>
+        </div>
         <div class="link">
           <a href="relatorios.php">Relatorios</a>
         </div>

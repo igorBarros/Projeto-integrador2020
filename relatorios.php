@@ -2,13 +2,13 @@
 session_start();
 require_once "conecta.php";
 
-// if (!empty($_SESSION['id_usuario'])) {
-//     $_SESSION['id_usuario'];
-// } else {
-//     $_SESSION['msg'] = "Você precisa estar logado";
-//     header("Location: index.php");
-// }
-// $idLogado = $_SESSION['id_usuario'];
+if (!empty($_SESSION['id_usuario'])) {
+    $_SESSION['id_usuario'];
+} else {
+    $_SESSION['msg'] = "Você precisa estar logado";
+    header("Location: index.php");
+}
+$idLogado = $_SESSION['id_usuario'];
 
 
 ?>
@@ -45,7 +45,9 @@ require_once "conecta.php";
                 <div class="link">
                     <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
                 </div>
-
+                <div class="link">
+                    <a href="gerenciamento.php">Gerenciamento de solicitações</a>
+                </div>
                 <div class="link active">
                     <a href="relatorios.php">Relatorios</a>
                 </div>
@@ -61,38 +63,37 @@ require_once "conecta.php";
 
         <div id="principal" class="principal col-9">
             <p><i>Nesta página você pode gerar os relatórios a fim de quantificar o status das solicitação dos alunos cadastrados na plataforma:</i></p>
-            <form action="">
+            <form action="gera.php" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label class="text-modalidade"> <b>Status da solicitação</b> </label>
 
                         <label class="form-check">
-                            <input type="radio" name="modalidade" value="Aprovada"><span class="label label-success"> Aprovadas</span>
+                            <input type="radio" name="status" value="Aprovado"><span class="label label-success"> Aprovadas</span>
                         </label>
 
                         <label class="form-check">
-                            <input type="radio" name="modalidade" value="Revisão"><span class="label label-success"> Pendentes</span>
+                            <input type="radio" name="status" value="Revisão"><span class="label label-success"> Pendentes</span>
                         </label>
 
                         <label class="form-check">
-                            <input type="radio" name="modalidade" value="Reprovado"><span class="label label-success"> Negadas</span>
+                            <input type="radio" name="status" value="Reprovado"><span class="label label-success"> Negadas</span>
                         </label>
                     </div>
                     <div class="form-group col-md-3">
                         <label><b>Data da solicitação</b></label>
-                        <input type="date" class="form-control">
+                        <input name="data" type="date" class="form-control">
                         </select>
                     </div>
 
                     <div class="form-group col-md-2">
                         <label> </label>
-                        <button class="form-control">Buscar</button>
+                        <button type="submit" class="form-control">Buscar</button>
                     </div>
 
                 </div>
-
+            </form>
         </div>
-        </form>
 
     </div>
     </div>

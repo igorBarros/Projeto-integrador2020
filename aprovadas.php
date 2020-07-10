@@ -87,7 +87,7 @@ $horaAprovadas = mysqli_query($conexao, $sql);
               <td> <?php echo $hora["titulo"]; ?> </td>
               <td> <?php echo $hora["modalidade"]; ?> </td>
               <td> <?php echo $hora["descricao"]; ?> </td>
-              <td> <?php echo $hora["horas"]; ?> </td>
+              <td> <?php echo $hora["horas"]; ?>h </td>
             </tr>
           </tbody>
         <?php } ?>

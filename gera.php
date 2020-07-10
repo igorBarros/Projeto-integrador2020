@@ -10,7 +10,11 @@ if (!empty($_SESSION['id_usuario'])) {
 }
 $idLogado = $_SESSION['id_usuario'];
 
+$status = $_POST['status'];
+$nome = $_POST['data'];
 
+$sql = "SELECT * FROM `horasAlunos` INNER JOIN usuarios ON horasAlunos.id_usuario = usuarios.id_usuario WHERE `status` = '$status' AND `dataCadastro` = '$data'";
+$relatorio = mysqli_query($conexao, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +28,8 @@ $idLogado = $_SESSION['id_usuario'];
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- chamando CSS -->
     <link rel="stylesheet" href="estilo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 
 
@@ -37,7 +43,7 @@ $idLogado = $_SESSION['id_usuario'];
     <div class="row">
         <div id="menu" class="menu col-3">
             <nav>
-                <div class="link active">
+                <div class="link">
                     <a href="paginaAdm.php">Principal</a>
                 </div>
                 <div class="link">
@@ -46,7 +52,7 @@ $idLogado = $_SESSION['id_usuario'];
                 <div class="link">
                     <a href="gerenciamento.php">Gerenciamento de solicitações</a>
                 </div>
-                <div class="link">
+                <div class="link active">
                     <a href="relatorios.php">Relatorios</a>
                 </div>
                 <div class="link">
@@ -60,26 +66,22 @@ $idLogado = $_SESSION['id_usuario'];
         </div>
 
         <div id="principal" class="principal col-9">
-            <h4 style="text-align: left;">
-                <?php
-
-                if (!empty($_SESSION['id_usuario'])) {
-                    echo "Olá " . $_SESSION['nome'] . ",";
-                } else {
-                    $_SESSION['msg'] = "Você precisa estar logado";
-                    header("Location: index.php");
-                }
-                ?>
-
-            </h4><br>
-
-            <p>Seja bem vindo à Plataforma de Validação de Atividades Complementares.
-                Aqui você poderá gerenciar as solicitações de Atividades Acadêmicas Complementares (AAC) dos alunos da Graduação em Análise e Desenvolvimento de Sistemas.</p>
-
-            <p>Acesse o menu lateral para acompanhar as Atividades Complementares cadastradas pelos alunos.</p>
-
-
+            <h7>Dados da solicitação</h7>
+            <?php while ($horas = mysqli_fetch_assoc($relatorio)) { ?>
+                <div class="card border-secondary mb-3" style="max-width: 30rem;">
+                    <div class="card-body text-secondary">
+                        <label for="">Código solicitação: <?php echo $horas['id_horas']; ?> </label><br>
+                        <label for="">Data de abertura: <?php echo $date->format('d-m-Y H:i:s'); ?></label><br>
+                        <label for="">Título solicitação: <?php echo $horas['titulo']; ?></label><br>
+                        <label for="">Modalidade: <?php echo $horas['modalidade']; ?></label><br>
+                        <label for="">Descrição: <?php echo $horas['descricao']; ?></label><br>
+                        <label for="">Arquivo: <?php echo $horas['arquivo']; ?></label>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
+
+    </div>
     </div>
 
     <footer>

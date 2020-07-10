@@ -10,7 +10,8 @@ if (!empty($_SESSION['id_usuario'])) {
 }
 $idLogado = $_SESSION['id_usuario'];
 
-
+$sql = "SELECT * FROM `horasAlunos` INNER JOIN usuarios ON horasAlunos.id_usuario = usuarios.id_usuario where `status` = 'Aprovado' ORDER BY `dataCadastro` DESC";
+$horasAlunos = mysqli_query($conexao, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -37,19 +38,19 @@ $idLogado = $_SESSION['id_usuario'];
     <div class="row">
         <div id="menu" class="menu col-3">
             <nav>
-                <div class="link active">
+                <div class="link">
                     <a href="paginaAdm.php">Principal</a>
                 </div>
                 <div class="link">
                     <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
                 </div>
-                <div class="link">
+                <div class="link active">
                     <a href="gerenciamento.php">Gerenciamento de solicitações</a>
                 </div>
                 <div class="link">
                     <a href="relatorios.php">Relatorios</a>
                 </div>
-                <div class="link">
+                <div class="link ">
                     <a href="sistema.php">sistema</a>
                 </div>
                 <div class="link">
@@ -60,23 +61,34 @@ $idLogado = $_SESSION['id_usuario'];
         </div>
 
         <div id="principal" class="principal col-9">
-            <h4 style="text-align: left;">
-                <?php
+            <p><i>Consulte abaixo os processos disponiblizados pela coordenação:</i></p>
 
-                if (!empty($_SESSION['id_usuario'])) {
-                    echo "Olá " . $_SESSION['nome'] . ",";
-                } else {
-                    $_SESSION['msg'] = "Você precisa estar logado";
-                    header("Location: index.php");
-                }
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Aluno</th>
+                        <th scope="col">Modalidade</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Horas</th>
+                    </tr>
+                </thead>
+
+                <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) {
+                    $date = new dateTime($horas['dataCadastro']);
+
                 ?>
 
-            </h4><br>
+                    <tbody>
+                        <tr>
+                            <td> <?php echo $horas['nome']; ?> </td>
+                            <td> <?php echo $horas['modalidade']; ?> </td>
+                            <td> <?php echo $horas['titulo']; ?> </td>
+                            <td> <?php echo $horas['horas']; ?> </td>
+                        </tr>
+                    </tbody>
 
-            <p>Seja bem vindo à Plataforma de Validação de Atividades Complementares.
-                Aqui você poderá gerenciar as solicitações de Atividades Acadêmicas Complementares (AAC) dos alunos da Graduação em Análise e Desenvolvimento de Sistemas.</p>
-
-            <p>Acesse o menu lateral para acompanhar as Atividades Complementares cadastradas pelos alunos.</p>
+                <?php } ?>
+            </table>
 
 
         </div>

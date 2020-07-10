@@ -2,13 +2,13 @@
 session_start();
 require_once "conecta.php";
 
-// if (!empty($_SESSION['id_usuario'])) {
-//     $_SESSION['id_usuario'];
-// } else {
-//     $_SESSION['msg'] = "Você precisa estar logado";
-//     header("Location: index.php");
-// }
-// $idLogado = $_SESSION['id_usuario'];
+if (!empty($_SESSION['id_usuario'])) {
+    $_SESSION['id_usuario'];
+} else {
+    $_SESSION['msg'] = "Você precisa estar logado";
+    header("Location: index.php");
+}
+$idLogado = $_SESSION['id_usuario'];
 
 
 ?>
@@ -43,7 +43,9 @@ require_once "conecta.php";
                 <div class="link">
                     <a href="acompanhamentoAdm.php">Acompanhamento de solicitações</a>
                 </div>
-
+                <div class="link">
+                    <a href="gerenciamento.php">Gerenciamento de solicitações</a>
+                </div>
                 <div class="link">
                     <a href="relatorios.php">Relatorios</a>
                 </div>
@@ -58,7 +60,30 @@ require_once "conecta.php";
         </div>
 
         <div id="principal" class="principal col-9">
+            <p><i>Adicione um novo usuario;</i></p>
+            <form method="post" action="novoUsuario.php" class="dadosUsuario">
+                <div class="form-group">
+                    <input style="width: 500px;" type="nome" class="form-control" name="nome" placeholder="Nome completo">
+                </div>
+                <div class="form-group">
+                    <input style="width: 500px;" type="nome" class="form-control" name="usuario" placeholder="Usuário">
+                </div>
+                <div class="form-group">
+                    <input style="width: 500px;" type="email" class="form-control" name="email" placeholder="Email">
+                </div>
 
+                <div class="form-group">
+                    <input style="width: 500px;" type="password" class="form-control" name="senha" placeholder="Senha">
+                </div>
+                <div class="form-group">
+                    <select class="custom-select" style="width: 500px;" name="nivel">
+                        <option disabled selected>Selecione...</option>
+                        <option value="0">Aluno</option>
+                        <option value="1">Administrador</option>
+                    </select>
+                </div>
+                <button style="width:150px;" type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
 
         </div>
     </div>
