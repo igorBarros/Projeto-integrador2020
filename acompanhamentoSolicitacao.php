@@ -4,10 +4,10 @@ date_default_timezone_set('America/Sao_Paulo');
 require_once "conecta.php";
 
 if (!empty($_SESSION['id_usuario'])) {
-    $_SESSION['id_usuario'];
+  $_SESSION['id_usuario'];
 } else {
-    $_SESSION['msg'] = "Você precisa estar logado";
-    header("Location: index.php");
+  $_SESSION['msg'] = "Você precisa estar logado";
+  header("Location: index.php");
 }
 $idLogado = $_SESSION['id_usuario'];
 
@@ -27,6 +27,7 @@ $horaAluno = mysqli_query($conexao, $sql);
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <!-- chamando CSS -->
   <link rel="stylesheet" href="estilo.css">
+
 </head>
 
 
@@ -76,10 +77,10 @@ $horaAluno = mysqli_query($conexao, $sql);
           </tr>
         </thead>
 
-        <?php while($hora = $horaAluno->fetch_array()){
+        <?php while ($hora = $horaAluno->fetch_array()) {
           $date = new dateTime($hora['dataCadastro']);
-          ?>
-          
+        ?>
+
           <tbody>
             <tr>
               <td> <?php echo $hora["titulo"]; ?> </td>
@@ -92,13 +93,13 @@ $horaAluno = mysqli_query($conexao, $sql);
               </td>
               <td> <textarea class="form-control" name="motivo" disabled rows="2"><?php echo $hora['motivo']; ?></textarea></td>
               <td>
-              <?php $id = $hora['id_horas']; 
-                echo "<a href=revisaSolicitacao.php?id=".$id.">Reencaminhar solicitação</a>"
+                <?php $id = $hora['id_horas'];
+                echo "<a href=revisaSolicitacao.php?id=" . $id . ">Reencaminhar solicitação</a>"
                 ?>
               </td>
             </tr>
           </tbody>
-        <?php }?>
+        <?php } ?>
       </table>
 
 

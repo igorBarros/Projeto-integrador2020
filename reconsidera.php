@@ -14,7 +14,12 @@ $status = $_POST['status'];
 $descricao = $_POST['descricao'];
 $horas = $_POST['horas'];
 
-
+if (empty($status)) { ?>
+    <script>
+      alert('O campo status deve ser preenchido');
+      window.location.replace("acompanhamentoAdm.php");
+    </script>
+<?php } else{
 $sql = "UPDATE horasalunos SET status = '$status' WHERE id_horas = $id";
 $reconsidera = mysqli_query($conexao, $sql);
 
@@ -23,8 +28,8 @@ $horas = mysqli_query($conexao, $sql);
 
 $sql = "INSERT INTO `reconsidera` (`motivo`, `id_horas`) VALUES ('$descricao', '$id')";
 $motivo = mysqli_query($conexao, $sql);
+}    
 
-// header("Location: acompanhamentoAdm.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

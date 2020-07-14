@@ -27,6 +27,18 @@ $horasAlunos = mysqli_query($conexao, $sql);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- chamando CSS -->
     <link rel="stylesheet" href="estilo.css">
+
+    <script>
+        function verifica() {
+            const select = document.getElementById('aprovado');
+            const optionSelected = select.options[select.selectedIndex].value;
+            if (optionSelected === 'Aprovado') {
+                document.getElementById('horas').style.display = "block";
+            } else {
+                document.getElementById('horas').style.display = "none";
+            }
+        }
+    </script>
 </head>
 
 
@@ -74,9 +86,7 @@ $horasAlunos = mysqli_query($conexao, $sql);
                         <label for="">Título solicitação: <?php echo $horas['titulo']; ?></label><br>
                         <label for="">Modalidade: <?php echo $horas['modalidade']; ?></label><br>
                         <label for="">Descrição: <?php echo $horas['descricao']; ?></label><br>
-                        <label for="">Arquivo: <?php echo $horas['arquivo']; ?></label>
-
-
+                        <label for="">Arquivo: </label> <a href=""><?php echo $horas['arquivo']; ?></a>
                     </div>
                 </div>
             <?php } ?>
@@ -86,8 +96,8 @@ $horasAlunos = mysqli_query($conexao, $sql);
             <form method="POST" action="reconsidera.php?id=<?php echo $id; ?>">
 
                 <div class="form-group">
-                    <select style="width: 480px;" name="status" class="custom-select">
-                        <option selected>Selecione...</option>
+                    <select id="aprovado" style="width: 480px;" name="status" class="custom-select" onchange="verifica()">
+                        <option disabled selected>Selecione...</option>
                         <option value="Aprovado">Aprovar</option>
                         <option value="Revisão">Revisar</option>
                         <option value="Reprovado">Reprovar</option>
@@ -95,8 +105,7 @@ $horasAlunos = mysqli_query($conexao, $sql);
                 </div>
 
                 <div style="width: 480px;" class="form-group">
-                    <label for="">Caso solicitação aprovada, identifique a quantidade de horas abaixo</label>
-                    <input type="number" name="horas" class="form-control" id="horas"></input>
+                    <input placeholder="Horas aprovadas" style="display:none;" type="number" name="horas" class="form-control" id="horas"></input>
                 </div>
 
                 <div style="width: 480px;" class="form-group">

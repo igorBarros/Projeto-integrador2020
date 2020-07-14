@@ -10,6 +10,8 @@ if (!empty($_SESSION['id_usuario'])) {
 }
 $idLogado = $_SESSION['id_usuario'];
 
+$sql = "SELECT * FROM `usuarios` WHERE `nivel` = 0";
+$usuario = mysqli_query($conexao, $sql);
 
 ?>
 
@@ -65,7 +67,7 @@ $idLogado = $_SESSION['id_usuario'];
             <p><i>Nesta página você pode gerar os relatórios a fim de quantificar o status das solicitação dos alunos cadastrados na plataforma:</i></p>
             <form action="gera.php" method="POST">
                 <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label class="text-modalidade"> <b>Status da solicitação</b> </label>
 
                         <label class="form-check">
@@ -80,15 +82,20 @@ $idLogado = $_SESSION['id_usuario'];
                             <input type="radio" name="status" value="Reprovado"><span class="label label-success"> Negadas</span>
                         </label>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label><b>Data da solicitação</b></label>
-                        <input name="data" type="date" class="form-control">
+                    <div class="form-group col-md-2">
+                        <select style="margin-top: 24px;" name="nome" class="form-control">
+                            <option>Buscar por aluno</option>
+                            <?php while ($usuarios = mysqli_fetch_assoc($usuario)) { ?>
+                                <option><?php echo $usuarios['nome']; ?> </option>
+
+                            <?php } ?>
+
                         </select>
                     </div>
 
-                    <div class="form-group col-md-2">
+                    <div style="margin-top: 24px;" class="form-group">
                         <label> </label>
-                        <button type="submit" class="form-control">Buscar</button>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
                     </div>
 
                 </div>

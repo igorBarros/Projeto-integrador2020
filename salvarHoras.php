@@ -10,8 +10,6 @@ if (!empty($_SESSION['id_usuario'])) {
   header("Location: index.php");
 }
 
-
-
 $idLogado = $_SESSION['id_usuario'];
 $modalidade = $_POST['modalidade'];
 $titulo = $_POST['titulo'];

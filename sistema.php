@@ -24,6 +24,20 @@ $idLogado = $_SESSION['id_usuario'];
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- chamando CSS -->
     <link rel="stylesheet" href="estilo.css">
+    <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+
+    <script>
+        function verifica() {
+            const select = document.getElementById('adm');
+            const optionSelected = select.options[select.selectedIndex].value;
+            if (optionSelected == 0) {
+                document.getElementById('turma').style.display = "block";
+            } else {
+                document.getElementById('turma').style.display = "none";
+            }
+        }
+    </script>
+
 </head>
 
 
@@ -60,7 +74,7 @@ $idLogado = $_SESSION['id_usuario'];
         </div>
 
         <div id="principal" class="principal col-9">
-            <p><i>Adicione um novo usuario;</i></p>
+            <p><i>Adicionar um novo usuario;</i></p>
             <form method="post" action="novoUsuario.php" class="dadosUsuario">
                 <div class="form-group">
                     <input style="width: 500px;" type="nome" class="form-control" name="nome" placeholder="Nome completo">
@@ -71,16 +85,17 @@ $idLogado = $_SESSION['id_usuario'];
                 <div class="form-group">
                     <input style="width: 500px;" type="password" class="form-control" name="senha" placeholder="Senha">
                 </div>
+
                 <div class="form-group">
-                    <select class="custom-select" style="width: 500px;" name="nivel">
+                    <select id="adm" class="custom-select" style="width: 500px;" name="nivel" onchange="verifica()">
                         <option disabled selected>Selecione...</option>
                         <option value="0">Aluno</option>
                         <option value="1">Administrador</option>
                     </select>
                 </div>
+
                 <div class="form-group">
-                    <label for="">Se usuario aluno, informar turma.</label>
-                    <input style="width: 500px;" type="text" class="form-control" name="turma" placeholder="Turma">
+                    <input style="display:none; width: 500px;" id="turma"  type="text" class="form-control" name="turma" placeholder="Turma">
                 </div>
                 <button style="width:150px;" type="submit" class="btn btn-primary">Cadastrar</button>
             </form>

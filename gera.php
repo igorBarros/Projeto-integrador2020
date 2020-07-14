@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/Sao_Paulo');
 require_once "conecta.php";
 
 if (!empty($_SESSION['id_usuario'])) {
@@ -11,9 +12,9 @@ if (!empty($_SESSION['id_usuario'])) {
 $idLogado = $_SESSION['id_usuario'];
 
 $status = $_POST['status'];
-$nome = $_POST['data'];
+$nome = $_POST['nome'];
 
-$sql = "SELECT * FROM `horasAlunos` INNER JOIN usuarios ON horasAlunos.id_usuario = usuarios.id_usuario WHERE `status` = '$status' AND `dataCadastro` = '$data'";
+$sql = "SELECT * FROM `horasAlunos` INNER JOIN usuarios ON horasAlunos.id_usuario = usuarios.id_usuario WHERE `status` = '$status' AND `nome` = '$nome'";
 $relatorio = mysqli_query($conexao, $sql);
 ?>
 
@@ -66,19 +67,37 @@ $relatorio = mysqli_query($conexao, $sql);
         </div>
 
         <div id="principal" class="principal col-9">
-            <h7>Dados da solicitação</h7>
-            <?php while ($horas = mysqli_fetch_assoc($relatorio)) { ?>
-                <div class="card border-secondary mb-3" style="max-width: 30rem;">
-                    <div class="card-body text-secondary">
-                        <label for="">Código solicitação: <?php echo $horas['id_horas']; ?> </label><br>
-                        <label for="">Data de abertura: <?php echo $date->format('d-m-Y H:i:s'); ?></label><br>
-                        <label for="">Título solicitação: <?php echo $horas['titulo']; ?></label><br>
-                        <label for="">Modalidade: <?php echo $horas['modalidade']; ?></label><br>
-                        <label for="">Descrição: <?php echo $horas['descricao']; ?></label><br>
-                        <label for="">Arquivo: <?php echo $horas['arquivo']; ?></label>
-                    </div>
-                </div>
-            <?php } ?>
+            <p><i>Solicitações <?php echo $_POST['status']; ?> do aluno <?php echo $_POST['nome']; ?></i></p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Código solicitação</th>
+                        <th scope="col">Data de abertura</th>
+                        <th scope="col">Título solicitação</th>
+                        <th scope="col">Modalidade</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Arquivo</th>
+                        <th scope="col">Horas aprovadas</th>
+
+                    </tr>
+                </thead>
+                <?php while ($horas = mysqli_fetch_assoc($relatorio)) {
+                    $date = new dateTime($horas['dataCadastro']);
+                ?>
+                    <tbody>
+                        <tr>
+                            <td> <?php echo $horas['id_horas']; ?> </td>
+                            <td> <?php echo $date->format('d-m-Y H:i:s'); ?> </td>
+                            <td> <?php echo $horas['titulo']; ?> </td>
+                            <td> <?php echo $horas['modalidade']; ?> </td>
+                            <td> <?php echo $horas['descricao']; ?> </td>
+                            <td> <?php echo $horas['arquivo'];   ?> </td>
+                            <td> <?php echo  $horas['horas']; ?> </td>
+
+                        </tr>
+                    </tbody>
+                <?php } ?>
+            </table>
         </div>
 
     </div>

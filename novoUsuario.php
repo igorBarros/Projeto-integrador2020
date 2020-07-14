@@ -15,11 +15,18 @@ $usuario = $_POST['usuario'];
 $senha = $_POST['senha'];
 $nivel = $_POST['nivel'];
 $turma = $_POST['turma'];
-
 $senhacriptografada = password_hash($senha, PASSWORD_DEFAULT);
 
-echo $sql = "INSERT INTO `usuarios` (nome, usuario, senha, nivel, turma) VALUES ('$nome', '$usuario', '$senhacriptografada', '$nivel', '$turma')";
+if(empty($nome && $usuario && $senha && $nivel)) {
+  ?>
+<script>
+  alert('Todos os campos devem ser preenchidos');
+  window.location.replace("sistema.php");
+</script>
+<?php } else{
+$sql = "INSERT INTO `usuarios` (nome, usuario, senha, nivel, turma) VALUES ('$nome', '$usuario', '$senhacriptografada', '$nivel', '$turma')";
 $usuario = mysqli_query($conexao, $sql);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +77,7 @@ $usuario = mysqli_query($conexao, $sql);
       <div id="cadastro" class="card border-secondary mb-3" style="left: 450px; top: 190px; max-width: 18rem; padding: 1.25rem; text-align: center;">
         <?php
         if ($horasAluno = true) {
-          echo "Usuario ".$usuario." cadastrado com sucesso!"; ?>
+          echo "Usuario ".$nome." cadastrado com sucesso!"; ?>
           <a class="form-control" href="sistema.php">OK</a>
         <?php
         } else {
