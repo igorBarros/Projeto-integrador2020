@@ -17,16 +17,18 @@ $nivel = $_POST['nivel'];
 $turma = $_POST['turma'];
 $senhacriptografada = password_hash($senha, PASSWORD_DEFAULT);
 
-if(empty($nome && $usuario && $senha && $nivel)) {
-  ?>
+if(empty($nome && $usuario && $senha)) { ?>
+
 <script>
   alert('Todos os campos devem ser preenchidos');
   window.location.replace("sistema.php");
 </script>
+
 <?php } else{
 $sql = "INSERT INTO `usuarios` (nome, usuario, senha, nivel, turma) VALUES ('$nome', '$usuario', '$senhacriptografada', '$nivel', '$turma')";
 $usuario = mysqli_query($conexao, $sql);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -78,6 +78,7 @@ $horasAlunos = mysqli_query($conexao, $sql);
 
             <?php while ($horas = mysqli_fetch_assoc($horasAlunos)) {
                 $date = new dateTime($horas['dataCadastro']);
+                $arquivo = $horas['arquivo'];
             ?>
                 <div class="card border-secondary mb-3" style="max-width: 30rem;">
                     <div class="card-body text-secondary">
@@ -86,7 +87,7 @@ $horasAlunos = mysqli_query($conexao, $sql);
                         <label for="">Título solicitação: <?php echo $horas['titulo']; ?></label><br>
                         <label for="">Modalidade: <?php echo $horas['modalidade']; ?></label><br>
                         <label for="">Descrição: <?php echo $horas['descricao']; ?></label><br>
-                        <label for="">Arquivo: </label> <a href=""><?php echo $horas['arquivo']; ?></a>
+                        <label for="">Descrição: <?php echo $horas['arquivo']; ?></label><br>
                     </div>
                 </div>
             <?php } ?>

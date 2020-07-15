@@ -60,7 +60,7 @@ $idLogado = $_SESSION['id_usuario'];
     </div>
 
     <div id="principal" class="principal col-9">
-      <form method="POST" action="salvarHoras.php" class="modalidade">
+      <form method="POST" action="salvarHoras.php" class="modalidade" >
         <h5><i>Lembre-se, a modalidade selecionada deve ter relação com a atividade.</i></h5>
 
         <div class="row">

@@ -87,13 +87,14 @@ $horaAluno = mysqli_query($conexao, $sql);
               <td> <?php echo $hora["modalidade"]; ?> </td>
               <td> <?php echo $date->format('d-m-Y H:i:s'); ?> </td>
               <td>
-                <select disabled style="width: 130px;" class="custom-select">
+                <select id="status" disabled style="width: 130px;" class="custom-select">
                   <option value=""><?php echo $hora["status"]; ?></option>
                 </select>
               </td>
               <td> <textarea class="form-control" name="motivo" disabled rows="2"><?php echo $hora['motivo']; ?></textarea></td>
               <td>
-                <?php $id = $hora['id_horas'];
+                <?php
+                $id = $hora['id_horas'];
                 echo "<a href=revisaSolicitacao.php?id=" . $id . ">Reencaminhar solicitação</a>"
                 ?>
               </td>
@@ -101,7 +102,6 @@ $horaAluno = mysqli_query($conexao, $sql);
           </tbody>
         <?php } ?>
       </table>
-
 
     </div>
   </div>

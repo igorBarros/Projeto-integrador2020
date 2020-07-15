@@ -61,9 +61,7 @@ $idLogado = $_SESSION['id_usuario'];
         <div id="formUsuario" class="principal col-9">
             <p><i>Altere abaixo sua senha;</i></p>
             <form method="post" action="salvaDadosUsuario.php" class="dadosUsuario">
-                <div class="form-group">
-                    <input style="width: 500px;" type="nome" class="form-control" name="nome" id="nome" placeholder="Nome">
-                </div>
+
                 <div class="form-group">
                     <input style="width: 500px;" type="password" class="form-control" name="senha" placeholder="Senha atual">
                 </div>
@@ -71,7 +69,7 @@ $idLogado = $_SESSION['id_usuario'];
                     <input style="width: 500px;" type="password" class="form-control" name="senha" placeholder="Nova senha">
                 </div>
 
-                <button style="width:150px;" type="submit" class="btn btn-primary">Salvar</button>
+                <button style="width:150px;" type="submit" class="btn btn-primary">Alterar</button>
             </form>
 
 

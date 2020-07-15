@@ -17,13 +17,15 @@ $upload = $_POST['upload'];
 $descricao = $_POST['descricao'];
 
 if (empty($modalidade && $titulo && $upload && $descricao)) { ?>
+
   <script>
     alert('Todos os campos devem ser preenchidos');
     window.location.replace("novasolicitacao.php");
   </script>
-<?php } else{
-$sql = "INSERT INTO `horasalunos` (`id_usuario`, `modalidade`, `titulo`, `arquivo`, `descricao`, `status`, `dataCadastro`) VALUES ('$idLogado', '$modalidade', '$titulo', '$upload', '$descricao', 'aguardando', NOW())";
-$horasAluno = mysqli_query($conexao, $sql);
+  
+<?php } else {
+  $sql = "INSERT INTO `horasalunos` (`id_usuario`, `modalidade`, `titulo`, `arquivo`, `descricao`, `status`, `dataCadastro`) VALUES ('$idLogado', '$modalidade', '$titulo', '$upload', '$descricao', 'aguardando', NOW())";
+  $horasAluno = mysqli_query($conexao, $sql);
 }
 
 ?>
@@ -59,12 +61,14 @@ $horasAluno = mysqli_query($conexao, $sql);
           <a href="acompanhamentoSolicitacao.php">Acompanhamento de solicitações</a>
         </div>
         <div class="link">
+          <a href="aprovadas.php">Solicitações Aprovadas</a>
+        </div>
+        <div class="link">
           <a href="dadosUsuario.php">Dados do usuário</a>
         </div>
         <div class="link">
           <?php echo "<a href='sair.php'>Sair</a>"; ?>
         </div>
-
       </nav>
     </div>
 

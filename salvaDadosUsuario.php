@@ -12,14 +12,19 @@ if (!empty($_SESSION['id_usuario'])) {
 }
 
 $idLogado = $_SESSION['id_usuario'];
-
-$nome = $_POST['nome'];
 $senha = $_POST['senha'];
-
 $CripitografiaSenha = password_hash($senha, PASSWORD_DEFAULT);
 
+if(empty($senha)) { ?>
+<script>
+  alert('Todos os campos devem ser preenchidos');
+  window.location.replace("dadosUsuario.php");
+</script>
+<?php }else{
+  
 $sql = "UPDATE `usuarios` SET `senha` = '$CripitografiaSenha' WHERE(`id_usuario` = '$idLogado') limit 1";
 $dadoUsuario = mysqli_query($conexao, $sql);
+}
 
 ?>
 <!DOCTYPE html>
